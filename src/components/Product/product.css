@@ -1,0 +1,50 @@
+.imgContainer{
+    position: relative;
+    overflow: hidden;
+}
+.imgContainer a{
+    display: block;
+}
+
+.btn{
+    position: absolute;
+    right:0;
+    top:85%;
+    height: 10%;
+    width: 40%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: aliceblue;
+    background: linear-gradient(to right, #10ffc3, #06c5ff);
+    border: hidden;
+    outline: none;
+    transition:0.3s;
+    transform: translateX(101%);
+    cursor: pointer;
+}
+.imgContainer:hover .btn{
+  transform: translateX(0);
+}
+.imgContainer:hover img{
+    opacity: 0.5;
+}
+
+
+img{
+    width: 90%;
+}
+
+.product{
+    text-align: center;
+    margin: 1vh 1vw;
+}
+
+p{
+    font-size: 1rem;
+}
+
+
+.price{
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

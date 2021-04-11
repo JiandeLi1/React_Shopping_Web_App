@@ -1,0 +1,28 @@
+.rootBody{
+    position: relative;
+}
+.cartSection{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  z-index: 1000;
+  transition: all 0.3s linear 0.3s;
+  
+}
+
+.shoppingCart{
+    width: 100%;
+    height: 98vh;
+    background-color: #fff;
+}
+
+.transparentSection{
+    width: 10%;
+    height: 100vh;
+    background-color: #fff;
+    opacity: 0.5;
+   
+}

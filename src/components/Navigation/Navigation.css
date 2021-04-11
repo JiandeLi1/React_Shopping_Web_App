@@ -1,0 +1,20 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  font-size: 2rem;
+  justify-content: space-between;
+  background-color: #45ccb8;
+  color: aliceblue;
+}
+nav .menu,
+nav .navCenter,
+nav .cartSign {
+  margin: 1vh 2vw;
+}
+nav .navCenter {
+  font-weight: 600;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+nav .cartSign {
+  cursor: pointer;
+}
