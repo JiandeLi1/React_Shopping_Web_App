@@ -48,3 +48,23 @@ p{
     font-size: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.modal{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2vh;
+}
+
+.modalInfo{
+    width: 50%;
+}
+
+.productTitle, .productPrice{
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.productSize{
+    font-weight: 600;
+}
+

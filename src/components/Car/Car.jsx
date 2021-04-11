@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-
 import Grid from '@material-ui/core/Grid';
 import CancelIcon from '@material-ui/icons/Cancel';
+import Fade from 'react-reveal/Fade'
 import './Car.css'
 
 export default class Car extends Component {
@@ -18,7 +18,7 @@ export default class Car extends Component {
     handleInput = (e) => {
         this.setState({[e.target.name]:e.target.value});
     }
-
+//create a order
     createOrder = (e) => {
         e.preventDefault();
         const order = {
@@ -51,6 +51,7 @@ export default class Car extends Component {
                 }
                 
                     {cartItems.map(item => (
+                    <Fade right cascade>   
                         <div key={ item._id } className="cartItem">
                             <img src={item.image} alt="" />
                             <div className="info">
@@ -64,7 +65,8 @@ export default class Car extends Component {
                                     >Remove</button>
                                 </div>  
                             </div>
-                        </div>
+                            </div>
+                        </Fade>
                     ))}
                         </div>
 
@@ -83,6 +85,7 @@ export default class Car extends Component {
                          </div>
                         )}
                         {this.state.showCheckout && (
+                            <Fade right cascade>
                             <form className="checkoutForm"
                                 onSubmit={ this.createOrder}>
                             <div className="input">
@@ -134,7 +137,7 @@ export default class Car extends Component {
                                     Finish</button>
                            
                         </form>
-
+                            </Fade>
                         )}  
                    </Grid>
              </Grid>
