@@ -47,6 +47,7 @@
     height: 30px;
     border-radius: 3px;
    background: linear-gradient(to right, #10ffc3, #06c5ff);
+   cursor: pointer;
 }
 
 .total{
@@ -72,6 +73,37 @@
     color: aliceblue;    
     border-radius: 5px;
     background: linear-gradient(to right, #10ffc3, #06c5ff);
+    cursor: pointer;
+}
+
+
+.checkoutForm{
+    width: 350%;
+    margin: 15px 0 0 15px ;
+    text-align: center;
+}
+
+.input{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.input>input{
+    outline: none;
+}
+
+.finishBtn{
+    height: 40px;
+    width: 100px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    color: aliceblue;    
+    border-radius: 5px;
+    background: linear-gradient(to right, #10ffc3, #06c5ff);
+    cursor: pointer;
 }
 
 

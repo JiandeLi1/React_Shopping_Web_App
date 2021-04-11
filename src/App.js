@@ -14,7 +14,7 @@ function App() {
 
   const [product, setProduct] = useState({
     product: data.products,
-    cartItem:[],
+    cartItem: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
     size: "",
     sort: ""
   })
@@ -25,10 +25,15 @@ function App() {
     //Copy the recent products in cart
     let cartItems = product.cartItem;
     //Take out the product you choose in cart
+    cartItems = cartItems.filter(x => x._id !== p._id)
+    
+    //setProduct is a asynchronous step
     setProduct({
       ...product,
-      cartItem: cartItems.filter(x=>x._id!==p._id)
+      cartItem: cartItems
     });
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }
 
   //Add item to the product.cartItem
@@ -54,7 +59,8 @@ function App() {
     }
 
     //To renew the cartItem in the product state.
-    setProduct({...product, cartItem:cartItems});
+    setProduct({ ...product, cartItem: cartItems });
+    localStorage.setItem("cartItems", JSON.stringify(product.cartItem));
   }
 
 
@@ -85,10 +91,11 @@ function App() {
     }
   }
 
+  //Show the cart
   const openCart = () => {
     setCarPosition("translateX(0%)");
   }
-
+  //Close the cart
   const closeCart = () => {
     setCarPosition("translateX(100%)");
   }
@@ -108,7 +115,12 @@ function App() {
               ((a._id > b._id) ? 1 : -1)
         )
       });
-    }
+  }
+  
+  //Create a order
+  const createOrder = (order) => {
+    alert(order.name+ order.email)
+  }
     
   
   return (
@@ -145,7 +157,8 @@ function App() {
             xm={12} md={6} lg={3}>
             <Car cartItems={product.cartItem}
               removeFromCart={removeFromCart}
-              closeCart={ closeCart }
+              closeCart={closeCart}
+              createOrder={ createOrder}
             />
           </Grid>
         </Grid>
