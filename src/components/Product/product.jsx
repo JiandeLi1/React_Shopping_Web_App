@@ -13,15 +13,21 @@ import { FETCH_PRODUCTS } from '../../types';
 
 
 class Product extends Component {
+    //Detecting customer click the product or not, is clicked,
+    //state.product will be the clicked prodcut, and modal will show the
+    //information about it
     state = {
         product:null
     }
     componentDidMount() {
         this.props.fetchProduct();
     }
+
+    //Set state.product equal  click product
     openModal = (product) => {
         this.setState({ product });
     }
+    //Click close sgin, close modal
     closeModal = () => {
         this.setState({ product: null });
     }
@@ -79,7 +85,7 @@ class Product extends Component {
 }
 
 export default connect((state) => ({
-    products: state.products.items
+    products: state.products.filteredItems
 }), {
     fetchProduct
 })(Product);

@@ -65,31 +65,31 @@ function App() {
 
 
   //To show the items which has the size you choose
-  const sizeProducts = (e) => {
-    //value is the size you choose
-    let { value } = e.target
-    //s is the sort parameter you choose
-    let s = product.sort;
+  // const sizeProducts = (e) => {
+  //   //value is the size you choose
+  //   let { value } = e.target
+  //   //s is the sort parameter you choose
+  //   let s = product.sort;
 
-    //If you didn't choose any size, show all product.
-    if (value === "") {
-      setProduct({ size:"", sort:s, product: data.products });
-    } else {
-      //If you choose any size, show the product that have the size you choose,
-      //and sort it will the sort parameter yuou choose
-      setProduct({
-        size: value,
-        sort:s,
-        product: data.products.filter(p => 
-          p.availableSizes.indexOf(value) >= 0
-        ).sort((a, b) => 
-          s === "lowest" ? ((a.price > b.price) ? 1 : -1) :
-            s === "highest" ? ((a.price < b.price) ? 1 : -1) :
-              ((a._id > b._id) ? 1 : -1)
-        )
-      });
-    }
-  }
+  //   //If you didn't choose any size, show all product.
+  //   if (value === "") {
+  //     setProduct({ size:"", sort:s, product: data.products });
+  //   } else {
+  //     //If you choose any size, show the product that have the size you choose,
+  //     //and sort it will the sort parameter yuou choose
+  //     setProduct({
+  //       size: value,
+  //       sort:s,
+  //       product: data.products.filter(p => 
+  //         p.availableSizes.indexOf(value) >= 0
+  //       ).sort((a, b) => 
+  //         s === "lowest" ? ((a.price > b.price) ? 1 : -1) :
+  //           s === "highest" ? ((a.price < b.price) ? 1 : -1) :
+  //             ((a._id > b._id) ? 1 : -1)
+  //       )
+  //     });
+  //   }
+  // }
 
   //Show the cart
   const openCart = () => {
@@ -100,22 +100,22 @@ function App() {
     setCarPosition("translateX(100%)");
   }
 
-  const sortProducts = (e) => {
-    //The value is the sort parameter you choose
-    let { value } = e.target;
-    //The curr is the product after yiu choose the parameter in the size
-    let curr = product.product;
+  // const sortProducts = (e) => {
+  //   //The value is the sort parameter you choose
+  //   let { value } = e.target;
+  //   //The curr is the product after yiu choose the parameter in the size
+  //   let curr = product.product;
     
-    //Sort product
-      setProduct({
-        sort: value,
-        product: curr.sort((a, b) => 
-          value === "lowest" ? ((a.price > b.price) ? 1 : -1) :
-            value === "highest" ? ((a.price < b.price) ? 1 : -1) :
-              ((a._id > b._id) ? 1 : -1)
-        )
-      });
-  }
+  //   //Sort product
+  //     setProduct({
+  //       sort: value,
+  //       product: curr.sort((a, b) => 
+  //         value === "lowest" ? ((a.price > b.price) ? 1 : -1) :
+  //           value === "highest" ? ((a.price < b.price) ? 1 : -1) :
+  //             ((a._id > b._id) ? 1 : -1)
+  //       )
+  //     });
+  // }
   
   //Create a order
   const createOrder = (order) => {
@@ -132,15 +132,10 @@ function App() {
         <Grid xs={0} sm={2}></Grid>
         <Grid container xs={12} sm={8}>
           <Grid item xs={12}>
-            <Filter count={product.product.length}
-              size={product.size}
-              sort={product.sort}
-              sizeProducts={sizeProducts}
-              sortProducts={ sortProducts}
-            ></Filter>
+            <Filter ></Filter>
           </Grid>
           <Product
-            products={product.product}
+           
             addToCart={  addToCart }
           ></Product>
         </Grid>
