@@ -5,12 +5,19 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import Fade from "react-reveal/Fade"
 import Modal from "react-modal"
 import Zoom from 'react-reveal/Zoom'
+import {connect} from 'react-redux'
+import { fetchProduct } from '../../redux/action/action'
 import './product.css'
+import { FETCH_PRODUCTS } from '../../types';
 
 
-export default class Product extends Component {
+
+class Product extends Component {
     state = {
         product:null
+    }
+    componentDidMount() {
+        this.props.fetchProduct();
     }
     openModal = (product) => {
         this.setState({ product });
@@ -21,30 +28,30 @@ export default class Product extends Component {
     render() {
         return (
             <Fragment>
-                
-                {this.props.products.map((product) => (
-                    <Grid item xs={12} sm={6} md={3} key={product._id}>
-                        <Fade top cascade>
-                        <div className="product">
-                            <div className="imgContainer">
-                                    <a href="javascript:;" onClick={()=>this.openModal(product)}>
-                                    <img src={product.image} alt="product.title" />
-                                </a>
-                                <button
-                                    className="btn"
-                                    onClick={() => this.props.addToCart(product)}>
-                                    <AddShoppingCartIcon fontSize="large" style={{ marginBottom:"-6px"}}/>Add to Cart
+                {!this.props.products ? (<div>Loading....</div>) :
+                    (this.props.products.map((product) => (
+                        <Grid item xs={12} sm={6} md={3} key={product._id}>
+                            <Fade top cascade>
+                                <div className="product">
+                                    <div className="imgContainer">
+                                        <a href="javascript:;" onClick={() => this.openModal(product)}>
+                                            <img src={product.image} alt="product.title" />
+                                        </a>
+                                        <button
+                                            className="btn"
+                                            onClick={() => this.props.addToCart(product)}>
+                                            <AddShoppingCartIcon fontSize="large" style={{ marginBottom: "-6px" }} />Add to Cart
                                 </button>
                                     
-                            </div>
-                            <p>{ product.title }</p>
-                            <div className="product-price">
-                                <div className="price">${product.price}</div>
-                            </div>
-                        </div>
-                     </Fade>
-                 </Grid>
-                ))}
+                                    </div>
+                                    <p>{product.title}</p>
+                                    <div className="product-price">
+                                        <div className="price">${product.price}</div>
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Grid>
+                    )))}
                 {this.state.product && (
                     <Modal isOpen={ true }>
                         <Zoom>
@@ -70,3 +77,9 @@ export default class Product extends Component {
         )
     }
 }
+
+export default connect((state) => ({
+    products: state.products.items
+}), {
+    fetchProduct
+})(Product);
