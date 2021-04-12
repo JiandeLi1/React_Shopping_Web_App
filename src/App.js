@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid';
-import data from './data.json'
 import Navigation from './components/Navigation/Navigation'
 import Product from './components/Product/product'
 import Filter from './components/Filter/Filter'
@@ -12,56 +10,56 @@ import './app.css'
 
 function App() {
 
-  const [product, setProduct] = useState({
-    product: data.products,
-    cartItem: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
-    size: "",
-    sort: ""
-  })
+  // const [product, setProduct] = useState({
+  //   product: data.products,
+  //   cartItem: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
+  //   size: "",
+  //   sort: ""
+  // })
 
   const [cartPosition, setCarPosition] = useState("translateX(100%)")
 
-  const removeFromCart = (p) => {
-    //Copy the recent products in cart
-    let cartItems = product.cartItem;
-    //Take out the product you choose in cart
-    cartItems = cartItems.filter(x => x._id !== p._id)
+  // const removeFromCart = (p) => {
+  //   //Copy the recent products in cart
+  //   let cartItems = product.cartItem;
+  //   //Take out the product you choose in cart
+  //   cartItems = cartItems.filter(x => x._id !== p._id)
     
-    //setProduct is a asynchronous step
-    setProduct({
-      ...product,
-      cartItem: cartItems
-    });
+  //   //setProduct is a asynchronous step
+  //   setProduct({
+  //     ...product,
+  //     cartItem: cartItems
+  //   });
 
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // }
 
   //Add item to the product.cartItem
-  const addToCart = (p) => {
-    //Copy what does the cart has
-    const cartItems = product.cartItem;
-    let inCart = false;
+  // const addToCart = (p) => {
+  //   //Copy what does the cart has
+  //   const cartItems = product.cartItem;
+  //   let inCart = false;
 
-    //To check the item you click is in the cart or not
-    cartItems.forEach((item) => {
-      if (item._id === p._id) {
-        //If in the cart, the item count +1
-        item.count++;
-        //inCart become true to tell next statement the item you click already in in the cart,
-        //WE don't need to push a need item to the cart.
-        inCart = true;
-      } 
-    })
-    //If the item you click is not in the cart, 
-    //Pushing this to the cart, and set this item's count in 1. 
-    if (!inCart) {
-      cartItems.push({...p, count:1})
-    }
+  //   //To check the item you click is in the cart or not
+  //   cartItems.forEach((item) => {
+  //     if (item._id === p._id) {
+  //       //If in the cart, the item count +1
+  //       item.count++;
+  //       //inCart become true to tell next statement the item you click already in in the cart,
+  //       //WE don't need to push a need item to the cart.
+  //       inCart = true;
+  //     } 
+  //   })
+  //   //If the item you click is not in the cart, 
+  //   //Pushing this to the cart, and set this item's count in 1. 
+  //   if (!inCart) {
+  //     cartItems.push({...p, count:1})
+  //   }
 
-    //To renew the cartItem in the product state.
-    setProduct({ ...product, cartItem: cartItems });
-    localStorage.setItem("cartItems", JSON.stringify(product.cartItem));
-  }
+  //   //To renew the cartItem in the product state.
+  //   setProduct({ ...product, cartItem: cartItems });
+  //   localStorage.setItem("cartItems", JSON.stringify(product.cartItem));
+  // }
 
 
   //To show the items which has the size you choose
@@ -134,10 +132,7 @@ function App() {
           <Grid item xs={12}>
             <Filter ></Filter>
           </Grid>
-          <Product
-           
-            addToCart={  addToCart }
-          ></Product>
+          <Product></Product>
         </Grid>
         <Grid xs={0} sm={2}></Grid>
       </Grid>
@@ -150,8 +145,7 @@ function App() {
           </Grid>
           <Grid className="shoppingCart"
             xm={12} md={6} lg={3}>
-            <Car cartItems={product.cartItem}
-              removeFromCart={removeFromCart}
+            <Car
               closeCart={closeCart}
               createOrder={ createOrder}
             />

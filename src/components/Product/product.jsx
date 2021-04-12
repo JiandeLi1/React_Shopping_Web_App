@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { addToCart } from '../../redux/action/action'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Grid from '@material-ui/core/Grid';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -8,7 +9,6 @@ import Zoom from 'react-reveal/Zoom'
 import {connect} from 'react-redux'
 import { fetchProduct } from '../../redux/action/action'
 import './product.css'
-import { FETCH_PRODUCTS } from '../../types';
 
 
 
@@ -85,7 +85,9 @@ class Product extends Component {
 }
 
 export default connect((state) => ({
-    products: state.products.filteredItems
+    products: state.products.filteredItems,
+    cartItems: state.cart.cartItems
 }), {
-    fetchProduct
+    fetchProduct,
+    addToCart
 })(Product);

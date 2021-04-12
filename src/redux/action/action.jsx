@@ -1,7 +1,9 @@
 import {
     FETCH_PRODUCTS,
     FITER_PRODUCTS_BY_SIZE,
-    ORDER_PRODUCTS_BY_PRICE
+    ORDER_PRODUCTS_BY_PRICE,
+    ADD_TO_CART,
+    REMOVE_FROM_CART
 } from "../../types";
 
 export const fetchProduct = () => async (dispatch) => {
@@ -45,6 +47,36 @@ export const sortProducts = (filteredProducts,  sort) => (dispatch) => {
     })
 }
 
+export const addToCart = (product) => (dispatch, getState) => {
+    //Using getState to get the perState
+    const cartItems = getState().cart.cartItems.slice();
+    const exists = false;
+    cartItems.forEach(x => {
+        if (x._id == product._id) {
+            x.count++;
+            exists = true;
+        }
+    })
+    if (!exists) {
+        cartItems.push({...product, count:1});
+    }
+
+    dispatch({
+        type: ADD_TO_CART,
+        payload: { cartItems },
+    });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+}
+
+export const removeFromCart = (product) => (dispatch, getState) => {
+    const cartItems = getState().cart.cartItems.slice().filter(x => x._id != product._id);
+
+    dispatch({
+        type: REMOVE_FROM_CART,
+        payload: { cartItems },
+    });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+}
 
 
 

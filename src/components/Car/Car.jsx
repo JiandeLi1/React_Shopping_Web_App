@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { removeFromCart } from '../../redux/action/action'
 import Grid from '@material-ui/core/Grid';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Fade from 'react-reveal/Fade'
 import './Car.css'
+;
 
-export default class Car extends Component {
+class Car extends Component {
     state = {
         name: "",
         email: "",
@@ -145,3 +148,12 @@ export default class Car extends Component {
         )
     }
 }
+
+export default connect((state) => ({
+    cartItems:state.cart.cartItems
+}),
+    {
+        removeFromCart
+    }
+    
+)(Car)
