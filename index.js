@@ -6,6 +6,8 @@ const shortid = require("shortid");
 
 const app = express();
 app.use(bodyParser.json());
+app.use("/", express.static("./build"));
+app.get("/", (req, res) => res.sendFile("/build/index.html"));
 
 mongoose.connect("mongodb+srv://Alex:Delozhan123@cluster0.zc0lf.mongodb.net/shopping-cart", {
     useNewUrlParser: true,
