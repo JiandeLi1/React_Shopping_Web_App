@@ -28,7 +28,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "node indexr.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
