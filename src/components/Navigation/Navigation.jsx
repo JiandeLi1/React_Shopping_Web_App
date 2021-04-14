@@ -13,7 +13,7 @@ export default class Header extends Component {
                         <MenuIcon fontSize="large"/>
                     </div>
                     <div className="navCenter">
-                            Good<FavoriteBorderIcon />Clothes
+                            Good<FavoriteBorderIcon />Tea
                     </div>
                     <div className="cartSign">
                         <ShoppingCartIcon

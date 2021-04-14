@@ -8,7 +8,7 @@ import './app.css'
 
 
 
-function App() {
+function Shopping() {
 
   // const [product, setProduct] = useState({
   //   product: data.products,
@@ -16,8 +16,6 @@ function App() {
   //   size: "",
   //   sort: ""
   // })
-
-  const [cartPosition, setCarPosition] = useState("translateX(100%)")
 
   // const removeFromCart = (p) => {
   //   //Copy the recent products in cart
@@ -90,14 +88,7 @@ function App() {
   // }
 
   //Show the cart
-  const openCart = () => {
-    setCarPosition("translateX(0%)");
-  }
-  //Close the cart
-  const closeCart = () => {
-    setCarPosition("translateX(100%)");
-  }
-
+ 
   // const sortProducts = (e) => {
   //   //The value is the sort parameter you choose
   //   let { value } = e.target;
@@ -116,16 +107,12 @@ function App() {
   // }
   
   //Create a order
-  const createOrder = (order) => {
-    alert(order.name+ order.email)
-  }
+ 
     
   
   return (
     <div className="rootBody">
-      <Grid xs={ 12 }>
-        <Navigation openCart={ openCart }/>
-      </Grid>
+      
       <Grid container>
         <Grid xs={0} sm={2}></Grid>
         <Grid container xs={12} sm={8}>
@@ -137,28 +124,9 @@ function App() {
         <Grid xs={0} sm={2}></Grid>
       </Grid>
       
-      <div className="cartSection"
-        style={{transform: cartPosition}}
-      >
-        <Grid container>
-          <Grid className="transparentSection" sm={0} md={6} lg={9}>
-          </Grid>
-          <Grid className="shoppingCart"
-            xm={12} md={6} lg={3}>
-            <Car
-              closeCart={closeCart}
-              createOrder={ createOrder}
-            />
-          </Grid>
-        </Grid>
-        
-      </div>
-        
-      
-      
       
     </div>
   );
 }
 
-export default App;
+export default Shopping;

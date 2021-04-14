@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeFromCart } from '../../redux/action/action'
-import Grid from '@material-ui/core/Grid';
+import Modal from 'react-modal'
+import Zoom from 'react-reveal/Zoom'
 import CancelIcon from '@material-ui/icons/Cancel';
+import {
+    removeFromCart,
+    createOrder,
+    clearOrder,
+    addItems,
+    subItems
+} from '../../redux/action/action'
+import Grid from '@material-ui/core/Grid';
 import Fade from 'react-reveal/Fade'
 import './Car.css'
 ;
@@ -24,20 +32,27 @@ class Car extends Component {
 //create a order
     createOrder = (e) => {
         e.preventDefault();
+      
+        
+        this.setState({ ...this.state, showCheckout: false })
+        
         const order = {
             name: this.state.name,
             email: this.state.email,
             address: this.state.address,
             zip: this.state.zip,
-            card: this.state.card,
-            cvv: this.state.cvv,
-            cartItems:this.props.cartItems
+            cartItems: this.props.cartItems,
+            total: this.props.cartItems.reduce((a,b)=>a+b.price*b.count, 0)
         }
 
         this.props.createOrder(order)
+        this.props.closeCart();
+    }
+    closeModal = () => {
+        this.props.clearOrder();
     }
     render() {
-        const { cartItems } = this.props;
+        const { cartItems,order } = this.props;
         return (
             <Grid container className="cart">
                 <Grid container xs={12}>
@@ -62,7 +77,19 @@ class Car extends Component {
                                     { item.title }
                                 </div>
                                 <div className="price">
-                                    <span>{item.count} X ${item.price}</span>
+                                        <span>
+                                            
+                                            <span className="addItems"
+                                                onClick={ ()=>this.props.addItems(item)}
+                                            >
+                                                +
+                                            </span>
+                                            {item.count}
+                                            <span className="subItems"
+                                                 onClick={ ()=>this.props.subItems(item)}
+                                            >-</span>
+                                            &nbsp;&nbsp;
+                                              ${item.price}</span>
                                     <button className="removeBtn"
                                         onClick={ () => this.props.removeFromCart(item) }
                                     >Remove</button>
@@ -119,20 +146,7 @@ class Car extends Component {
                                      onChange={ this.handleInput}
                                             required/>
                             </div>
-                            <div  className="input">
-                                <label htmlFor="">Card Number: </label>
-                                    <input type="text"
-                                        name="card"
-                                     onChange={ this.handleInput}
-                                            required/>
-                            </div>
-                            <div  className="input">
-                                <label htmlFor="">CVV: </label>
-                                    <input type="text"
-                                        name="cvv"
-                                     onChange={ this.handleInput}
-                                            required/>
-                            </div>
+                           
 
                                 <button
                                     className="finishBtn"
@@ -141,19 +155,56 @@ class Car extends Component {
                            
                         </form>
                             </Fade>
-                        )}  
-                   </Grid>
-             </Grid>
+                        )}
+                        
+                        {
+                    order && (
+                        <Modal
+                            className="orderInfo"
+                            isOpen={true}  
+                        >
+                            <Zoom>
+                                        <CancelIcon
+                                            fontSize="lagre"
+                                            style={{margin:"1rem"}}
+                                            onClick={this.closeModal} />
+                                    <div className="order">
+                       
+                                    <h1>Your order id: {order._id}</h1>
+                                    <p>Name: {order.name}</p>
+                                    <p>Email: {order.email}</p>
+                                    <p>Address: {order.address}</p>
+                                    <p>Zip Code: {order.zip}</p>
+                                    <h1>Total: {order.total.toFixed(2)}</h1>
+                                    <h1>Thanks! Have a Good Day!!</h1>    
+                                        
+                                </div>
+                            </Zoom>
+                            
+
+                        </Modal>
+                 )   
+                }
+                    </Grid>
+                    
+                </Grid>
+                 
+               
         </Grid>
         )
     }
 }
 
 export default connect((state) => ({
+    order:state.order.order,
     cartItems:state.cart.cartItems
 }),
     {
-        removeFromCart
+        removeFromCart,
+        createOrder,
+        clearOrder,
+        addItems,
+        subItems
     }
     
 )(Car)

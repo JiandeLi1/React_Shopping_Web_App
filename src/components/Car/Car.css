@@ -10,7 +10,7 @@
     flex-direction: row;
     box-sizing: border-box;
     width: 350%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     justify-content: space-between;
     border-radius: 5px;
@@ -33,7 +33,7 @@
 .price{
     display: flex;
     flex-direction: row;
-    font-size: 0.7rem;
+    font-size: 1rem;
     line-height: 30px;
     justify-content: space-around;
 
@@ -106,4 +106,28 @@
     cursor: pointer;
 }
 
+.orderInfo{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 1001;
+    width: 70%;
+    height: 70%;
+    font-weight: 600;
+    background-color: #ddd;
+    opacity: 0.8;
+}
+
+.order{
+    position: absolute;
+    top:30%;
+    left:40%;
+    transform: translate(-50%,-50%);
+
+}
+
+.addItems, .subItems{
+    cursor: pointer;
+}
 

@@ -1,0 +1,36 @@
+.main{
+    position: relative;
+}
+.storeLink{
+    position: absolute;
+    top:35vh;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px #aaa;
+    
+    
+}
+
+.storeLink img{
+ width: 100%;
+}
+
+.link{
+    position: absolute;
+    display: block;
+    top:85%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: 1000;
+    line-height: 40px;
+    text-align: center;
+    color: aliceblue;
+    background: linear-gradient(to right, #10ffc3, #06c5ff);
+    border-radius: 5px;
+
+}

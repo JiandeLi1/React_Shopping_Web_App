@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
 const shortid = require("shortid");
 
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/shopping-cart", {
+mongoose.connect("mongodb+srv://Alex:Delozhan123@cluster0.zc0lf.mongodb.net/shopping-cart", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -37,6 +38,50 @@ app.post("/api/products", async (req, res) => {
 app.delete("/api/products/:id", async (req, res) => {
   const deletedProduct = await Product.findByIdAndDelete(req.params.id);
   res.send(deletedProduct);
+});
+
+
+
+const Order = mongoose.model("order",
+  new mongoose.Schema(
+    {
+      _id: {
+        type: String,
+        default: shortid.generate,
+      },
+      email: String,
+      name: String,
+      address: String,
+      zip: String,
+      total: Number,
+      cartItems: [
+        {
+          _id: String,
+          title: String,
+          price: Number,
+          count: Number,
+        },
+      ],
+    },
+    {
+      timestamps: true,
+    }
+  )
+);
+
+app.post("/api/orders", async (req, res) => {
+  if (
+    !req.body.name ||
+    !req.body.email ||
+    !req.body.address ||
+    !req.body.zip ||
+    !req.body.total ||
+    !req.body.cartItems
+  ) {
+    return res.send({ message: "Need complete information." });
+  }
+  const order = await Order(req.body).save();
+  res.send(order);
 });
 
 const port = process.env.PORT || 5000;

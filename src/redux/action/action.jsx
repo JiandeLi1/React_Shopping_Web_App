@@ -3,7 +3,12 @@ import {
     FITER_PRODUCTS_BY_SIZE,
     ORDER_PRODUCTS_BY_PRICE,
     ADD_TO_CART,
-    REMOVE_FROM_CART
+    REMOVE_FROM_CART,
+    CREATE_ORDER,
+    CLEAR_ORDER,
+    CLEAR_CART,
+    ADD_ITEMS,
+    SUB_ITEMS
 } from "../../types";
 
 export const fetchProduct = () => async (dispatch) => {
@@ -78,7 +83,60 @@ export const removeFromCart = (product) => (dispatch, getState) => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
 }
 
+export const createOrder = (order) =>(dispatch)=> {
+    fetch("/api/orders", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+    }).then(res => res.json()).
+        then((data) => {
+            dispatch({type:CREATE_ORDER, payload:data});
+            localStorage.clear("cartItems");
+            dispatch({ type: CLEAR_CART });
+        }
+    )
+}
 
+export const clearOrder = () => (dispatch)=>{
+    dispatch({type:CLEAR_ORDER});
+}
+
+
+export const addItems=(product)=>(dispatch,getState)=>{
+    const cartItems = getState().cart.cartItems.slice()
+    cartItems.forEach(
+        x => {
+            if (x._id === product._id) {
+                x.count++;
+            }
+        }
+    );
+
+    dispatch({
+        type: ADD_ITEMS,
+        payload: { cartItems },
+    });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+}
+
+export const subItems=(product)=>(dispatch,getState)=>{
+    const cartItems = getState().cart.cartItems.slice();
+       cartItems.forEach(
+        x => {
+            if (x._id === product._id&&x.count>1) {
+                x.count--;
+            }
+        }
+    );
+
+    dispatch({
+        type: SUB_ITEMS,
+        payload: { cartItems },
+    });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+}
 
 
 

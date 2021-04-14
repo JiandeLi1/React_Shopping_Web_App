@@ -21,12 +21,10 @@ class Filter extends Component {
                     Size:&nbsp;
                     <select value={this.props.size} onChange={ (e)=>this.props.filterProduct(this.props.products, e.target.value, this.props.sort)}>
                         <option value="">ALL</option>
-                        <option value="XS">XS</option>
-                        <option value="X">X</option>
+                        <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
+                        
                     </select>
                 </div>
             </div>

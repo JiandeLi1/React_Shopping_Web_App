@@ -73,7 +73,7 @@ class Product extends Component {
                                     <p className="productTitle">{this.state.product.title}</p>
                                     <p className="productDesc">{this.state.product.description}</p>
                                     <p className="productSize">Avaliable Size: {this.state.product.availableSizes.toString()}</p>
-                                    <p className="productPrice">{ this.state.product.price}</p>
+                                    <p className="productPrice">${ this.state.product.price}</p>
                                 </div>
                             </div>
                         </Zoom>
